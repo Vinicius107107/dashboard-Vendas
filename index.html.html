@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BG · Resultado Junho 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fdf4f3;
+  --card:#ffffff;
+  --card2:#fce8e6;
+  --border:#f0d5d2;
+  --text:#1a1020;
+  --muted:#9e7f7c;
+  --green:#15803d;--green-bg:#dcfce7;
+  --yellow:#b45309;--yellow-bg:#fef3c7;
+  --red:#b91c1c;--red-bg:#fee2e2;
+  --blue:#1d4ed8;--blue-bg:#dbeafe;
+}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);padding:20px;min-width:860px;}
+
+/* HEADER */
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.h-brand{display:flex;align-items:center;gap:10px;}
+.h-dot{width:10px;height:10px;border-radius:50%;background:var(--blue);}
+.h-title{font-size:17px;font-weight:800;letter-spacing:-.02em;color:var(--text);}
+.h-title span{color:var(--blue);}
+.h-meta{font-size:11px;color:var(--muted);}
+.h-pills{display:flex;gap:8px;}
+.pill{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:4px 12px;font-size:11px;color:var(--muted);font-weight:500;box-shadow:0 1px 3px rgba(0,0,0,.06);}
+.pill strong{color:var(--text);}
+
+/* TOTAIS */
+.totais{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px;}
+.tot{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+.tot-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#7c4a47;margin-bottom:3px;}
+.tot-val{font-size:16px;font-weight:800;color:#1a1020;}
+.tot-sub{font-size:10px;color:var(--muted);margin-top:1px;}
+
+/* SORT BAR */
+.sort-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px;}
+.sort-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#7c4a47;margin-right:4px;white-space:nowrap;}
+.sbtn{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:4px 14px;font-size:11px;font-family:inherit;color:var(--muted);cursor:pointer;font-weight:600;transition:all .15s;}
+.sbtn:hover{border-color:#c0392b;color:#c0392b;}
+.sbtn.active{background:#c0392b;border-color:#c0392b;color:#fff;}
+.sort-pos{margin-left:auto;font-size:10px;color:var(--muted);font-weight:600;font-style:italic;}
+
+/* TABELA */
+.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+table{width:100%;border-collapse:collapse;}
+thead tr{background:var(--card2);border-bottom:1px solid var(--border);}
+th{padding:8px 10px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#7c4a47;text-align:right;white-space:nowrap;}
+th:first-child{text-align:left;padding-left:16px;}
+th.center{text-align:center;}
+tbody tr{border-top:1px solid var(--border);transition:background .1s;}
+tbody tr:hover{background:#fce8e6;}
+td{padding:7px 10px;font-size:12px;text-align:right;vertical-align:middle;color:var(--text);}
+td:first-child{text-align:left;padding-left:16px;}
+.loja-name{font-size:13px;font-weight:700;color:#1a1020;white-space:nowrap;}
+.val-real{font-weight:700;font-size:13px;color:#1a1020;}
+.val-proj{font-weight:700;font-size:13px;}
+.pct{display:inline-flex;align-items:center;justify-content:center;padding:3px 9px;border-radius:6px;font-size:11px;font-weight:800;white-space:nowrap;}
+.pct-g{background:var(--green-bg);color:var(--green);}
+.pct-y{background:var(--yellow-bg);color:var(--yellow);}
+.pct-r{background:var(--red-bg);color:var(--red);}
+.pct-b{background:var(--blue-bg);color:var(--blue);}
+.bar-wrap{display:flex;align-items:center;gap:6px;}
+.bar-track{flex:1;background:rgba(0,0,0,.08);border-radius:20px;height:6px;overflow:hidden;min-width:60px;}
+.bar-fill{height:100%;border-radius:20px;}
+
+/* RODAPÉ */
+.footer{margin-top:10px;display:flex;justify-content:space-between;align-items:center;font-size:10px;color:#9e7f7c;}
+.legend{display:flex;gap:14px;}
+.leg{display:flex;align-items:center;gap:5px;}
+.leg-dot{width:7px;height:7px;border-radius:50%;}
+
+/* BOTÃO PRINT */
+.btn-print{position:fixed;bottom:24px;right:24px;background:#c0392b;color:#fff;border:none;border-radius:10px;padding:10px 20px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;box-shadow:0 4px 16px rgba(192,57,43,.3);display:flex;align-items:center;gap:8px;z-index:999;}
+.btn-print:hover{background:#a93226;}
+@media print{
+  .btn-print{display:none!important;}
+  .sort-bar{display:none!important;}
+  body{padding:8px;}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="h-brand">
+    <div class="h-dot"></div>
+    <div>
+      <div class="h-title"><span>BG</span> · Resultado do Mês</div>
+      <div class="h-meta">Junho 2026 · Gerado em <span id="dataGer"></span></div>
+    </div>
+  </div>
+  <div class="h-pills">
+    <div class="pill">D<strong id="diaUtil">4</strong> de trabalho</div>
+    <div class="pill">Rede: <strong id="totalLojas">?</strong> lojas</div>
+    <div class="pill">Projeção rede: <strong id="projRede">?</strong></div>
+  </div>
+</div>
+
+<div class="totais" id="totais"></div>
+
+<div class="sort-bar">
+  <span class="sort-label">Ordenar por</span>
+  <button class="sbtn active" onclick="setSort('pct_proj',this)">% Projeção</button>
+  <button class="sbtn" onclick="setSort('pct_real',this)">% Realizado</button>
+  <button class="sbtn" onclick="setSort('realizado',this)">Faturado R$</button>
+  <button class="sbtn" onclick="setSort('projecao',this)">Projetado R$</button>
+  <button class="sbtn" onclick="setSort('meta',this)">Meta R$</button>
+  <button class="sbtn" onclick="setSort('nome',this)">Nome A–Z</button>
+  <span class="sort-pos" id="sortPos">Ranking por: % Projeção</span>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:175px">Loja</th>
+        <th>Realizado</th>
+        <th class="center">% Real</th>
+        <th style="width:160px" class="center">Progresso Real</th>
+        <th>Projetado</th>
+        <th class="center">% Proj</th>
+        <th style="width:160px" class="center">Progresso Proj</th>
+        <th>Meta</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
+
+<div class="footer">
+  <div class="legend">
+    <div class="leg"><div class="leg-dot" style="background:var(--green)"></div> Projeção ≥ 90%</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--yellow)"></div> 60–89%</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--red)"></div> &lt; 60%</div>
+  </div>
+  <div>Fonte: OPDV · BG Resultados</div>
+</div>
+
+<button class="btn-print" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
+
+<script>
+const DATA = [{"loja": "BG - Pelotas", "meta": 142019.07, "realizado": 15996.24, "projecao": 119971.8, "dias": 30, "pct_real": 11.3, "pct_proj": 84.5, "vendas": 298, "ticket": 53.68}, {"loja": "BG - Santa Maria", "meta": 103322.4, "realizado": 11043.11, "projecao": 82823.33, "dias": 30, "pct_real": 10.7, "pct_proj": 80.2, "vendas": 213, "ticket": 51.85}, {"loja": "BG - Iguatemi POA", "meta": 384119.02, "realizado": 38790.14, "projecao": 290926.05, "dias": 30, "pct_real": 10.1, "pct_proj": 75.7, "vendas": 655, "ticket": 59.22}, {"loja": "BG - Barra", "meta": 295420.91, "realizado": 28453.12, "projecao": 213398.4, "dias": 30, "pct_real": 9.6, "pct_proj": 72.2, "vendas": 578, "ticket": 49.23}, {"loja": "BG - Country Nova", "meta": 120472.59, "realizado": 12069.56, "projecao": 90521.7, "dias": 30, "pct_real": 10.0, "pct_proj": 75.1, "vendas": 249, "ticket": 48.47}, {"loja": "BG - Total", "meta": 275228.99, "realizado": 36193.46, "projecao": 271450.95, "dias": 30, "pct_real": 13.2, "pct_proj": 98.6, "vendas": 611, "ticket": 59.24}, {"loja": "BG - Aero Tortaria", "meta": 207915.14, "realizado": 26129.7, "projecao": 195972.75, "dias": 30, "pct_real": 12.6, "pct_proj": 94.3, "vendas": 664, "ticket": 39.35}, {"loja": "BG - Ipiranga", "meta": 586276.89, "realizado": 71294.28, "projecao": 534707.1, "dias": 30, "pct_real": 12.2, "pct_proj": 91.2, "vendas": 1506, "ticket": 47.34}, {"loja": "BG - Patio 24", "meta": 103192.33, "realizado": 18383.9, "projecao": 114899.38, "dias": 25, "pct_real": 17.8, "pct_proj": 111.3, "vendas": 390, "ticket": 47.14}, {"loja": "BG - Medplex", "meta": 195511.11, "realizado": 27387.9, "projecao": 171174.38, "dias": 25, "pct_real": 14.0, "pct_proj": 87.6, "vendas": 661, "ticket": 41.43}, {"loja": "BG - Praia de Belas", "meta": 228884.01, "realizado": 27445.78, "projecao": 205843.35, "dias": 30, "pct_real": 12.0, "pct_proj": 89.9, "vendas": 675, "ticket": 40.66}, {"loja": "BG - Canoas", "meta": 203513.54, "realizado": 20754.75, "projecao": 155660.62, "dias": 30, "pct_real": 10.2, "pct_proj": 76.5, "vendas": 519, "ticket": 39.99}, {"loja": "BG - Novo Hamburgo", "meta": 220611.01, "realizado": 21984.07, "projecao": 164880.52, "dias": 30, "pct_real": 10.0, "pct_proj": 74.7, "vendas": 364, "ticket": 60.4}, {"loja": "BG - Higienópolis", "meta": 196626.25, "realizado": 20937.53, "projecao": 157031.47, "dias": 30, "pct_real": 10.6, "pct_proj": 79.9, "vendas": 346, "ticket": 60.51}, {"loja": "BG - Iguatemi Caxias", "meta": 152153.55, "realizado": 12097.38, "projecao": 90730.35, "dias": 30, "pct_real": 8.0, "pct_proj": 59.6, "vendas": 286, "ticket": 42.3}, {"loja": "BG - Bourbon Wallig", "meta": 149663.04, "realizado": 16016.99, "projecao": 120127.43, "dias": 30, "pct_real": 10.7, "pct_proj": 80.3, "vendas": 332, "ticket": 48.24}, {"loja": "BG - Passo Fundo Shopping", "meta": 157863.13, "realizado": 12466.59, "projecao": 93499.43, "dias": 30, "pct_real": 7.9, "pct_proj": 59.2, "vendas": 256, "ticket": 48.7}, {"loja": "BG - João Pessoa", "meta": 63555.53, "realizado": 6939.81, "projecao": 43373.81, "dias": 25, "pct_real": 10.9, "pct_proj": 68.2, "vendas": 194, "ticket": 35.77}, {"loja": "BG - Aero Restaurante", "meta": 561005.12, "realizado": 69059.3, "projecao": 517944.75, "dias": 30, "pct_real": 12.3, "pct_proj": 92.3, "vendas": 1418, "ticket": 48.7}, {"loja": "BG - Zaffari Cabral", "meta": 89920.97, "realizado": 9442.36, "projecao": 70817.7, "dias": 30, "pct_real": 10.5, "pct_proj": 78.8, "vendas": 147, "ticket": 64.23}, {"loja": "BG - Itapema", "meta": 65004.8, "realizado": 8435.03, "projecao": 63262.73, "dias": 30, "pct_real": 13.0, "pct_proj": 97.3, "vendas": 150, "ticket": 56.23}, {"loja": "BG - Ramiro Nova", "meta": 116118.44, "realizado": 11900.55, "projecao": 89254.12, "dias": 30, "pct_real": 10.2, "pct_proj": 76.9, "vendas": 271, "ticket": 43.91}, {"loja": "BG - Medcenter", "meta": 161882.84, "realizado": 22860.96, "projecao": 142881.0, "dias": 25, "pct_real": 14.1, "pct_proj": 88.3, "vendas": 468, "ticket": 48.85}, {"loja": "BG - Bourbon Passo Fundo", "meta": 65004.8, "realizado": 8243.06, "projecao": 61822.95, "dias": 30, "pct_real": 12.7, "pct_proj": 95.1, "vendas": 163, "ticket": 50.57}, {"loja": "BG - Paseo", "meta": 113010.72, "realizado": 11493.43, "projecao": 86200.73, "dias": 30, "pct_real": 10.2, "pct_proj": 76.3, "vendas": 280, "ticket": 41.05}, {"loja": "BG - Saba Atlantida", "meta": 0.0, "realizado": 0, "projecao": 0, "dias": 0, "pct_real": 0, "pct_proj": 0, "vendas": 0, "ticket": 0}];
+
+let sortKey = 'pct_proj';
+
+const fmtK   = v => { if(!v) return '—'; if(v>=1000000) return 'R$ '+(v/1e6).toFixed(2).replace('.',',')+'M'; if(v>=1000) return 'R$ '+(v/1000).toFixed(1).replace('.',',')+'k'; return 'R$ '+v.toLocaleString('pt-BR',{maximumFractionDigits:0}); };
+const fmtF   = v => 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const pctCls = p => p>=90?'pct-g':p>=60?'pct-y':'pct-r';
+const barCol = p => p>=90?'var(--green)':p>=60?'var(--yellow)':'var(--red)';
+const bar    = (p,c) => `<div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:${Math.min(p,100).toFixed(1)}%;background:${c}"></div></div></div>`;
+
+// Totais
+const tM=DATA.reduce((s,d)=>s+d.meta,0), tR=DATA.reduce((s,d)=>s+d.realizado,0), tP=DATA.reduce((s,d)=>s+d.projecao,0);
+const pR=tM>0?tR/tM*100:0, pP=tM>0?tP/tM*100:0;
+const tV=DATA.reduce((s,d)=>s+d.vendas,0);
+const nOk=DATA.filter(d=>d.pct_proj>=90).length, nAt=DATA.filter(d=>d.pct_proj>=60&&d.pct_proj<90).length, nCr=DATA.filter(d=>d.pct_proj<60).length;
+
+document.getElementById('totalLojas').textContent = DATA.length;
+document.getElementById('projRede').textContent   = pP.toFixed(1)+'%';
+document.getElementById('dataGer').textContent    = new Date().toLocaleDateString('pt-BR');
+
+document.getElementById('totais').innerHTML = `
+  <div class="tot"><div class="tot-lbl">Meta Total Junho</div><div class="tot-val" style="color:var(--blue)">${fmtK(tM)}</div><div class="tot-sub">${DATA.length} lojas ativas</div></div>
+  <div class="tot"><div class="tot-lbl">Faturado Acumulado</div><div class="tot-val">${fmtK(tR)}</div><div class="tot-sub">${pR.toFixed(1)}% da meta</div></div>
+  <div class="tot"><div class="tot-lbl">Projeção do Mês</div><div class="tot-val" style="color:${barCol(pP)}">${fmtK(tP)}</div><div class="tot-sub">${pP.toFixed(1)}% da meta</div></div>
+  <div class="tot"><div class="tot-lbl">Vendas Acumuladas</div><div class="tot-val">${tV.toLocaleString('pt-BR')}</div><div class="tot-sub">unidades / kg</div></div>
+  <div class="tot"><div class="tot-lbl">Status Lojas</div>
+    <div style="display:flex;gap:10px;margin-top:4px">
+      <span style="font-size:12px;font-weight:700;color:var(--green)">● ${nOk} OK</span>
+      <span style="font-size:12px;font-weight:700;color:var(--yellow)">● ${nAt} Aten.</span>
+      <span style="font-size:12px;font-weight:700;color:var(--red)">● ${nCr} Crit.</span>
+    </div>
+  </div>`;
+
+const LABELS = {pct_proj:'% Projeção', pct_real:'% Realizado', realizado:'Faturado R$', projecao:'Projetado R$', meta:'Meta R$', nome:'Nome A–Z'};
+
+function setSort(key, el) {
+  sortKey = key;
+  document.querySelectorAll('.sbtn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('sortPos').textContent = 'Ranking por: ' + LABELS[key];
+  renderTable();
+}
+
+function renderTable() {
+  const sorted = sortKey === 'nome'
+    ? [...DATA].sort((a,b) => a.loja.localeCompare(b.loja,'pt-BR'))
+    : [...DATA].sort((a,b) => b[sortKey] - a[sortKey]);
+
+  document.getElementById('tbody').innerHTML = sorted.map(d => {
+    const col = barCol(d.pct_proj);
+    return `<tr>
+      <td class="loja-name">${d.loja.replace('BG - ','')}</td>
+      <td class="val-real">${fmtF(d.realizado)}</td>
+      <td><span class="pct pct-b">${d.pct_real}%</span></td>
+      <td>${bar(d.pct_real,'var(--blue)')}</td>
+      <td class="val-proj" style="color:${col}">${fmtK(d.projecao)}</td>
+      <td><span class="pct ${pctCls(d.pct_proj)}">${d.pct_proj}%</span></td>
+      <td>${bar(d.pct_proj,col)}</td>
+      <td style="color:var(--muted);font-size:11px">${fmtK(d.meta)}</td>
+    </tr>`;
+  }).join('');
+}
+
+renderTable();
+
+// Tenta ler o dia útil do dashboard principal (mesmo diretório)
+try {
+  const req = new XMLHttpRequest();
+  req.open('GET', 'dashboard_bg_junho2026.html', false);
+  req.send();
+  const match = req.responseText.match(/D<strong>(\d+)<\/strong> de trabalho/);
+  if (match) document.getElementById('diaUtil').textContent = match[1];
+} catch(e) {}
+</script>
+</body>
+</html>
