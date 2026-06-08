@@ -98,6 +98,25 @@ td:first-child{text-align:left;padding-left:16px;}
   .footer{margin-top:6px;}
   @page{size:A4 landscape;margin:8mm;}
 }
+
+/* MODAL CRITÉRIOS */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:2000;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border-radius:16px;padding:28px;max-width:480px;width:90%;box-shadow:0 8px 40px rgba(0,0,0,.18);position:relative;}
+.modal h2{font-size:15px;font-weight:800;color:#1a1020;margin-bottom:4px;}
+.modal-sub{font-size:11px;color:#9e7f7c;margin-bottom:18px;}
+.modal-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:18px;cursor:pointer;color:#9e7f7c;line-height:1;}
+.modal-close:hover{color:#1a1020;}
+.crit-block{margin-bottom:14px;}
+.crit-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#7c4a47;margin-bottom:6px;}
+.crit-item{display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;}
+.crit-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.crit-text{font-size:12px;color:#1a1020;line-height:1.5;}
+.crit-text strong{font-weight:700;}
+.status-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+.stag{display:flex;align-items:center;gap:5px;background:#f5f6fa;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;}
+.formula-box{background:#fdf4f3;border:1px solid #f0d5d2;border-radius:8px;padding:10px 14px;font-size:11px;color:#1a1020;line-height:1.8;}
+.formula-box code{background:#f0d5d2;border-radius:4px;padding:1px 5px;font-family:monospace;font-size:11px;color:#7c4a47;}
 </style>
 </head>
 <body>
@@ -158,6 +177,7 @@ td:first-child{text-align:left;padding-left:16px;}
   <div>Fonte: OPDV · BG Resultados</div>
 </div>
 
+<button onclick="openCrit()" style="position:fixed;bottom:66px;right:24px;background:#fff;color:#7c4a47;border:1px solid #f0d5d2;border-radius:10px;padding:9px 16px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.1);z-index:999;">📋 Critérios</button>
 <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
 
 <script>
@@ -237,5 +257,39 @@ try {
   if (match) document.getElementById('diaUtil').textContent = match[1];
 } catch(e) {}
 </script>
+<!-- MODAL CRITÉRIOS -->
+<div class="modal-overlay" id="modalCrit" onclick="if(event.target===this)closeCrit()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeCrit()">✕</button>
+    <h2>📋 Critérios de Acompanhamento</h2>
+    <div class="modal-sub">Como os indicadores são calculados</div>
+    <div class="crit-block">
+      <div class="crit-title">Fórmula de Projeção</div>
+      <div class="formula-box">
+        <code>Projeção</code> = (Faturado acumulado ÷ Dias úteis trabalhados) × Dias úteis do mês<br>
+        <code>% Realizado</code> = Faturado acumulado ÷ Meta do mês × 100<br>
+        <code>% Projeção</code> = Projeção ÷ Meta do mês × 100
+      </div>
+    </div>
+    <div class="crit-block">
+      <div class="crit-title">Status das Lojas</div>
+      <div class="status-row">
+        <div class="stag"><span style="color:#15803d">●</span> No ritmo — Projeção ≥ 90%</div>
+        <div class="stag"><span style="color:#b45309">●</span> Atenção — Projeção entre 60% e 89%</div>
+        <div class="stag"><span style="color:#b91c1c">●</span> Crítico — Projeção abaixo de 60%</div>
+      </div>
+    </div>
+    <div class="crit-block">
+      <div class="crit-title">Observações</div>
+      <div class="crit-item"><div class="crit-dot" style="background:#1d4ed8"></div><div class="crit-text">Lojas <strong>BG - Ipiranga</strong> e <strong>BG - Ipiranga 2</strong> são somadas e exibidas como uma única unidade.</div></div>
+      <div class="crit-item"><div class="crit-dot" style="background:#1d4ed8"></div><div class="crit-text">Lojas com <strong>25 dias úteis</strong>: Pátio 24, Medplex, Medcenter e João Pessoa. Demais lojas: <strong>30 dias úteis</strong>.</div></div>
+      <div class="crit-item"><div class="crit-dot" style="background:#1d4ed8"></div><div class="crit-text">A projeção é calculada com base na <strong>média diária acumulada</strong> do período exportado.</div></div>
+    </div>
+  </div>
+</div>
+<script>
+function openCrit(){ document.getElementById('modalCrit').classList.add('open'); }
+function closeCrit(){ document.getElementById('modalCrit').classList.remove('open'); }
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeCrit(); });</script>
 </body>
 </html>
