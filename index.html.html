@@ -126,6 +126,7 @@ td:first-child{text-align:left;padding-left:16px;}
   <button class="sbtn" onclick="setSort('realizado',this)">Faturado R$</button>
   <button class="sbtn" onclick="setSort('projecao',this)">Projetado R$</button>
   <button class="sbtn" onclick="setSort('meta',this)">Meta R$</button>
+  <button class="sbtn" onclick="setSort('pct_fat',this)">% Faturamento</button>
   <button class="sbtn" onclick="setSort('nome',this)">Nome A–Z</button>
   <span class="sort-pos" id="sortPos">Ranking por: % Projeção</span>
 </div>
@@ -193,7 +194,7 @@ document.getElementById('totais').innerHTML = `
     </div>
   </div>`;
 
-const LABELS = {pct_proj:'% Projeção', pct_real:'% Realizado', realizado:'Faturado R$', projecao:'Projetado R$', meta:'Meta R$', nome:'Nome A–Z'};
+const LABELS = {pct_proj:'% Projeção', pct_real:'% Realizado', pct_fat:'% Faturamento', realizado:'Faturado R$', projecao:'Projetado R$', meta:'Meta R$', nome:'Nome A–Z'};
 
 function setSort(key, el) {
   sortKey = key;
@@ -206,6 +207,8 @@ function setSort(key, el) {
 function renderTable() {
   const sorted = sortKey === 'nome'
     ? [...DATA].sort((a,b) => a.loja.localeCompare(b.loja,'pt-BR'))
+    : sortKey === 'pct_fat'
+    ? [...DATA].sort((a,b) => b.pct_real - a.pct_real)
     : [...DATA].sort((a,b) => b[sortKey] - a[sortKey]);
 
   document.getElementById('tbody').innerHTML = sorted.map(d => {
