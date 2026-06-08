@@ -82,7 +82,21 @@ td:first-child{text-align:left;padding-left:16px;}
 @media print{
   .btn-print{display:none!important;}
   .sort-bar{display:none!important;}
-  body{padding:8px;}
+  .header{position:static!important;}
+  body{padding:6px;min-width:unset!important;background:#fff!important;}
+  .totais{gap:4px;margin-bottom:8px;}
+  .tot{padding:6px 10px;}
+  .tot-val{font-size:13px!important;}
+  .tot-lbl{font-size:8px!important;}
+  .table-wrap{box-shadow:none;border:1px solid #ddd;}
+  th{padding:5px 7px!important;font-size:8px!important;}
+  td{padding:4px 7px!important;font-size:10px!important;}
+  .loja-name{font-size:11px!important;}
+  .val-real,.val-proj{font-size:10px!important;}
+  .pct{padding:2px 5px!important;font-size:9px!important;}
+  .bar-track{min-width:40px!important;}
+  .footer{margin-top:6px;}
+  @page{size:A4 landscape;margin:8mm;}
 }
 </style>
 </head>
@@ -170,7 +184,7 @@ document.getElementById('totais').innerHTML = `
   <div class="tot"><div class="tot-lbl">Meta Total Junho</div><div class="tot-val" style="color:var(--blue)">${fmtK(tM)}</div><div class="tot-sub">${DATA.length} lojas ativas</div></div>
   <div class="tot"><div class="tot-lbl">Faturado Acumulado</div><div class="tot-val">${fmtK(tR)}</div><div class="tot-sub">${pR.toFixed(1)}% da meta</div></div>
   <div class="tot"><div class="tot-lbl">Projeção do Mês</div><div class="tot-val" style="color:${barCol(pP)}">${fmtK(tP)}</div><div class="tot-sub">${pP.toFixed(1)}% da meta</div></div>
-  <div class="tot"><div class="tot-lbl">Vendas Acumuladas</div><div class="tot-val">${tV.toLocaleString('pt-BR')}</div><div class="tot-sub">unidades / kg</div></div>
+  <div class="tot"><div class="tot-lbl">Nº de Vendas</div><div class="tot-val">${tV.toLocaleString('pt-BR')}</div><div class="tot-sub">acumulado no período</div></div>
   <div class="tot"><div class="tot-lbl">Status Lojas</div>
     <div style="display:flex;gap:10px;margin-top:4px">
       <span style="font-size:12px;font-weight:700;color:var(--green)">● ${nOk} OK</span>
@@ -201,10 +215,10 @@ function renderTable() {
       <td class="val-real">${fmtF(d.realizado)}</td>
       <td><span class="pct pct-b">${d.pct_real}%</span></td>
       <td>${bar(d.pct_real,'var(--blue)')}</td>
-      <td class="val-proj" style="color:${col}">${fmtK(d.projecao)}</td>
+      <td class="val-proj" style="color:${col}">${fmtF(d.projecao)}</td>
       <td><span class="pct ${pctCls(d.pct_proj)}">${d.pct_proj}%</span></td>
       <td>${bar(d.pct_proj,col)}</td>
-      <td style="color:var(--muted);font-size:11px">${fmtK(d.meta)}</td>
+      <td style="color:var(--muted);font-size:11px">${fmtF(d.meta)}</td>
     </tr>`;
   }).join('');
 }
