@@ -195,7 +195,7 @@ const bar    = (p,c) => `<div class="bar-wrap"><div class="bar-track"><div class
 const tM=DATA.reduce((s,d)=>s+d.meta,0), tR=DATA.reduce((s,d)=>s+d.realizado,0), tP=DATA.reduce((s,d)=>s+d.projecao,0);
 const pR=tM>0?tR/tM*100:0, pP=tM>0?tP/tM*100:0;
 const tV=DATA.reduce((s,d)=>s+d.vendas,0);
-const nOk=DATA.filter(d=>d.pct_proj>=95).length, nAt=DATA.filter(d=>d.pct_proj>=90&&d.pct_proj<95).length, nCr=DATA.filter(d=>d.pct_proj<60).length;
+const nOk=DATA.filter(d=>d.pct_proj>=95).length, nAt=DATA.filter(d=>d.pct_proj>=90&&d.pct_proj<95).length, nCr=DATA.filter(d=>d.pct_proj<90).length;
 
 document.getElementById('totalLojas').textContent = DATA.length;
 document.getElementById('projRede').textContent   = pP.toFixed(1)+'%';
