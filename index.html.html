@@ -170,9 +170,9 @@ td:first-child{text-align:left;padding-left:16px;}
 
 <div class="footer">
   <div class="legend">
-    <div class="leg"><div class="leg-dot" style="background:var(--green)"></div> Projeção ≥ 90%</div>
-    <div class="leg"><div class="leg-dot" style="background:var(--yellow)"></div> 60–89%</div>
-    <div class="leg"><div class="leg-dot" style="background:var(--red)"></div> &lt; 60%</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--green)"></div> Projeção ≥ 95%</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--yellow)"></div> 90–94%</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--red)"></div> &lt; 90%</div>
   </div>
   <div>Fonte: OPDV · BG Resultados</div>
 </div>
@@ -187,15 +187,15 @@ let sortKey = 'pct_proj';
 
 const fmtK   = v => { if(!v) return '—'; if(v>=1000000) return 'R$ '+(v/1e6).toFixed(2).replace('.',',')+'M'; if(v>=1000) return 'R$ '+(v/1000).toFixed(1).replace('.',',')+'k'; return 'R$ '+v.toLocaleString('pt-BR',{maximumFractionDigits:0}); };
 const fmtF   = v => 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-const pctCls = p => p>=90?'pct-g':p>=60?'pct-y':'pct-r';
-const barCol = p => p>=90?'var(--green)':p>=60?'var(--yellow)':'var(--red)';
+const pctCls = p => p>=95?'pct-g':p>=90?'pct-y':'pct-r';
+const barCol = p => p>=95?'var(--green)':p>=90?'var(--yellow)':'var(--red)';
 const bar    = (p,c) => `<div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:${Math.min(p,100).toFixed(1)}%;background:${c}"></div></div></div>`;
 
 // Totais
 const tM=DATA.reduce((s,d)=>s+d.meta,0), tR=DATA.reduce((s,d)=>s+d.realizado,0), tP=DATA.reduce((s,d)=>s+d.projecao,0);
 const pR=tM>0?tR/tM*100:0, pP=tM>0?tP/tM*100:0;
 const tV=DATA.reduce((s,d)=>s+d.vendas,0);
-const nOk=DATA.filter(d=>d.pct_proj>=90).length, nAt=DATA.filter(d=>d.pct_proj>=60&&d.pct_proj<90).length, nCr=DATA.filter(d=>d.pct_proj<60).length;
+const nOk=DATA.filter(d=>d.pct_proj>=95).length, nAt=DATA.filter(d=>d.pct_proj>=90&&d.pct_proj<95).length, nCr=DATA.filter(d=>d.pct_proj<60).length;
 
 document.getElementById('totalLojas').textContent = DATA.length;
 document.getElementById('projRede').textContent   = pP.toFixed(1)+'%';
@@ -274,7 +274,7 @@ try {
     <div class="crit-block">
       <div class="crit-title">Status das Lojas</div>
       <div class="status-row">
-        <div class="stag"><span style="color:#15803d">●</span> No ritmo — Projeção ≥ 90%</div>
+        <div class="stag"><span style="color:#15803d">●</span> Na projeção — Projeção ≥ 95%</div>
         <div class="stag"><span style="color:#b45309">●</span> Atenção — Projeção entre 60% e 89%</div>
         <div class="stag"><span style="color:#b91c1c">●</span> Crítico — Projeção abaixo de 60%</div>
       </div>
